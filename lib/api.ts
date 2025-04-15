@@ -1,4 +1,5 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+const BASE_URL = 'https://movierecbackend-production.up.railway.app'
+
 
 export async function fetchRecommendations(genre?: string, year?: number) {
   const params = new URLSearchParams()

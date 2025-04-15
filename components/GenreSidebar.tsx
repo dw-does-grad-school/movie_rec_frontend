@@ -8,7 +8,6 @@ type Props = {
 
 export default function GenreSidebar({ selected, onSelect }: Props) {
   const [genres, setGenres] = useState<string[]>([])
-  console.log('API BASE URL:', process.env.NEXT_PUBLIC_API_BASE_URL)
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/genres`)
@@ -18,23 +17,21 @@ export default function GenreSidebar({ selected, onSelect }: Props) {
   }, [])
 
   return (
-    <aside className="w-48 p-4 border-r border-gray-700">
-      <h2 className="text-lg font-semibold mb-2">Genres</h2>
-      <ul className="space-y-1">
+    <aside className="w-64 p-6 bg-white border-r border-slate-200 shadow-sm">
+      <h2 className="text-xl font-semibold text-slate-800 mb-4">Genres</h2>
+      <ul className="space-y-2">
         {genres.map((genre) => (
           <li key={genre}>
             <button
-              className={`w-full text-left px-2 py-1 rounded ${
+              className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                 genre === selected
-                  ? 'bg-blue-600 text-white'
-                  : 'hover:bg-gray-700'
+                  ? 'bg-slate-700 text-white'
+                  : 'text-slate-700 hover:bg-slate-100'
               }`}
               onClick={() => onSelect(genre)}
             >
               {genre}
             </button>
-            <p>Genres: {JSON.stringify(genres)}</p>
-
           </li>
         ))}
       </ul>
