@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 
 type Props = {
@@ -11,8 +10,8 @@ export default function GenreSidebar({ selected, onSelect }: Props) {
   const [genres, setGenres] = useState<string[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:8000/genres')
-      .then(res => res.json())
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/genres`)
+      .then((res) => res.json())
       .then(setGenres)
       .catch(console.error)
   }, [])
@@ -26,13 +25,15 @@ export default function GenreSidebar({ selected, onSelect }: Props) {
             <button
               className={`w-full text-left px-2 py-1 rounded ${
                 genre === selected
-                  ? 'bg-sky-500 text-white'
-                  : 'hover:bg-gray-700 hover:text-white'
+                  ? 'bg-blue-600 text-white'
+                  : 'hover:bg-gray-700'
               }`}
               onClick={() => onSelect(genre)}
             >
               {genre}
             </button>
+            <p>Genres: {JSON.stringify(genres)}</p>
+
           </li>
         ))}
       </ul>
