@@ -1,6 +1,7 @@
 import MovieCard from './MovieCard'
+import { Movie } from '@/types/movie'
 
-export default function MovieList({ movies }: { movies: any[] }) {
+export default function MovieList({ movies }: { movies: Movie[] }) {
   if (!movies.length) return <p>No movies found.</p>
 
   return (

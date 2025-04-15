@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react'
 import { fetchRecommendations } from '@/lib/api'
 import MovieList from '@/components/MovieList'
 import GenreSidebar from '@/components/GenreSidebar'
+import { Movie } from '@/types/movie'
 
 export default function HomePage() {
   const [genre, setGenre] = useState('')
   const [year, setYear] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
-  const [movies, setMovies] = useState<any[]>([])
+  const [movies, setMovies] = useState<Movie[]>([])
 
   useEffect(() => {
     fetchRecommendations(genre, year ? parseInt(year) : undefined)
