@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react'
 type Props = {
   selected: string
   onSelect: (genre: string) => void
+  isOpen?: boolean
+  onClose?: () => void
 }
 
-export default function GenreSidebar({ selected, onSelect }: Props) {
+export default function GenreSidebar({ selected, onSelect, isOpen = true, onClose }: Props) {
   const [genres, setGenres] = useState<string[]>([])
 
   useEffect(() => {
@@ -17,7 +19,13 @@ export default function GenreSidebar({ selected, onSelect }: Props) {
   }, [])
 
   return (
-    <aside className="w-64 p-6 bg-white border-r border-slate-200 shadow-sm">
+    <aside 
+      className={`
+        fixed md:static inset-y-0 left-0 w-64 p-6 bg-white border-r border-slate-200 shadow-sm
+        transform transition-transform duration-300 ease-in-out z-50
+        ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+      `}
+    >
       <h2 className="text-xl font-semibold text-slate-800 mb-4">Genres</h2>
       <ul className="space-y-2">
         {genres.map((genre) => (
@@ -28,7 +36,10 @@ export default function GenreSidebar({ selected, onSelect }: Props) {
                   ? 'bg-slate-700 text-white'
                   : 'text-slate-700 hover:bg-slate-100'
               }`}
-              onClick={() => onSelect(genre)}
+              onClick={() => {
+                onSelect(genre)
+                onClose?.()
+              }}
             >
               {genre}
             </button>
