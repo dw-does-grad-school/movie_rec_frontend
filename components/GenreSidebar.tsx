@@ -8,6 +8,7 @@ type Props = {
 
 export default function GenreSidebar({ selected, onSelect }: Props) {
   const [genres, setGenres] = useState<string[]>([])
+  console.log('API BASE URL:', process.env.NEXT_PUBLIC_API_BASE_URL)
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/genres`)
